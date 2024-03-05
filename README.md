@@ -28,6 +28,6 @@ ER図 : https://drive.google.com/file/d/1Qf2orPlCZA3RFDg0uChFX38SAGCYEJPd/view?u
 - フレームワーク：Ruby on Rails
 - JSライブラリ：jQuery
 - IDE：Cloud9
-使用素材
+## 使用素材
 ・フリーイラスト素材として以下を使用  
       ◦ Adobe Stock(https://stock.adobe.com/jp/)
