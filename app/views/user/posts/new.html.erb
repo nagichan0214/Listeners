@@ -4,9 +4,15 @@
       <h5 class="text-dark bg-light p-4 mb-0">演奏会はどうでしたか？</h5>
       <div class="form-body p-4">
         <%= form_with model: @post, url: user_posts_path do |f| %>
-          <%= f.label :image, class: "fa-solid fa-upload text-center d-block border border-primary h-48 w-48 rounded-lg", style: "font-size: 48px; margin: 0 auto;" do %>
-  <%= f.file_field :image, accept: "image/*", style: "display: none;" %>
-<% end %>
+          <div style="display: flex; justify-content: center; align-items: center; height: 200px;">
+            <h6 style="text-align: center; margin: 0 8px;">写真をアップロード</h6> <!-- マージンを左右に調整 -->
+          </div>
+          <div style="display: flex; justify-content: center; align-items: center; height: 200px;">
+            <%= f.label :image, class: "text-center d-block border border-gray-300 rounded-full bg-white p-4", style: "font-size: 48px; width: 100px; height: 100px; border-radius: 20%; margin-top: -20px;" do %> <!-- マージンを上方向に調整 -->
+              <i class="fas fa-upload"></i>
+              <%= f.file_field :image, accept: "image/*", style: "display: none;" %>
+            <% end %>
+          </div>
           <div class="input-group mb-3 mt-4">
             <div class="input-group-prepend">
               <span class="input-group-text" aria-hidden="true"><i class="fa-solid fa-music"></i></span>
