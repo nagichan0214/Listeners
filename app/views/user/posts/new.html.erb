@@ -1,2 +1,23 @@
-<h1>User::Posts#new</h1>
-<p>Find me in app/views/user/posts/new.html.erb</p>
+<div class="container">
+  <div class="row no-gutters">
+    <div class="col-md-5 col-sm-10 mx-2 mx-sm-auto shadow-lg rounded px-0 my-5">
+      <h5 class="text-dark bg-light p-4 mb-0">演奏会はどうでしたか？</h5>
+      <div class="form-body p-4">
+        <%= form_with model: @post, url: user_posts_path do |f| %>
+          <%= f.label :image, class: "fa-solid fa-upload text-center d-block border border-primary h-48 w-48 rounded-lg", style: "font-size: 48px; margin: 0 auto;" do %>
+  <%= f.file_field :image, accept: "image/*", style: "display: none;" %>
+<% end %>
+          <div class="input-group mb-3 mt-4">
+            <div class="input-group-prepend">
+              <span class="input-group-text" aria-hidden="true"><i class="fa-solid fa-music"></i></span>
+            </div>
+            <%= f.text_field :title, class: "form-control", placeholder: "タイトル" %>
+          </div>
+          <%= f.text_area :body, class: "form-control", rows: "6", placeholder: "感想はこちら" %>
+          <hr>
+          <%= f.submit 'シェア', class: "btn btn-lg btn-block btn-info rounded-pill mt-4" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
