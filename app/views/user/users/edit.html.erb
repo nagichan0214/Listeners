@@ -1,2 +1,16 @@
-<h1>User::Users#edit</h1>
-<p>Find me in app/views/user/users/edit.html.erb</p>
+<h2>プロフィール編集</h2>
+<div>
+<%= form_with(model: @user, url: user_user_path(@user.id), method: :patch) do |form| %>
+  <label for="inputName">Name</label>
+  <%= form.text_field :name, autofocus: true, id:"inputName", placeholder:"名前"%>
+</div>
+
+<div>
+  <label for="inputImage">ProfileImage</label>
+  <%= form.file_field :profile_image, placeholder: "プロフィール画像", accept: "image/*" %>
+</div>
+
+<div>
+  <%= form.submit "変更を保存" %>
+</div>
+<% end %>

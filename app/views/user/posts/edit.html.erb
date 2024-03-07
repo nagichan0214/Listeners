@@ -1,2 +1,22 @@
-<h1>User::Posts#edit</h1>
-<p>Find me in app/views/user/posts/edit.html.erb</p>
+<h1><i class="fa-solid fa-pen-to-square"></i>投稿を編集</h1>
+
+<%= form_with(model: @post, url: user_post_path(@post.id), method: :patch) do |form| %>
+  <div>
+    <%= form.label :image, "画像のアップロード" %><br>
+    <%= form.file_field :image %>
+  </div>
+
+  <div>
+    <%= form.label :title, "タイトル" %><br>
+    <%= form.text_field :title %>
+  </div>
+
+  <div>
+    <%= form.label :body, "内容" %><br>
+    <%= form.text_area :body %>
+  </div>
+
+  <div>
+    <%= form.submit "更新する" %>
+  </div>
+<% end %>
