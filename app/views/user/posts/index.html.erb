@@ -19,6 +19,7 @@
                   <% end %>
                 </p>
                 <p class="card-text">内容：<%= post.body %></p>
+                <p><%= link_to "#{post.post_comments.count} コメント", user_post_path(post.id) %></p>
               </div>
             </div>
           </div>    
