@@ -1,0 +1,11 @@
+<table class="table">
+  <tbody>
+    <% @favorite_posts.each do |post| %>
+    <tr>
+      <td>
+        <%= link_to post.title, user_post_path(post) %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

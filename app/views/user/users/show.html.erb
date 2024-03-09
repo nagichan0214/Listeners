@@ -3,6 +3,7 @@
   <%= image_tag @user.get_profile_image(100,100) %>
   <h3><%= @user.name %></h3>
   <h3><%= @user.introduction %></h3>
+  <p><%= link_to "いいねした投稿", favorites_user_user_path %></p>
   <% if @user == current_user && !@user.guest_user? %>
     <p><%= link_to "プロフィール編集", edit_user_user_path %></p>
   <% end %>
