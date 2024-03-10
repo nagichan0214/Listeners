@@ -6,6 +6,7 @@
   <p><%= link_to "いいねした投稿", favorites_user_user_path %></p>
   <% if @user == current_user && !@user.guest_user? %>
     <p><%= link_to "プロフィール編集", edit_user_user_path %></p>
+    <p><%= link_to "退会する", user_unsubscribe_path %></p>
   <% end %>
 </div>
 
