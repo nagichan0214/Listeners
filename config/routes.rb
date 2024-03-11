@@ -32,5 +32,12 @@ Rails.application.routes.draw do
 
     get "search" => "searches#search"
   end
+
+  namespace :admin do
+    root to: 'user_managements#index'
+    resources :user_managements, only: [:index, :show, :edit, :update, :destroy]
+  end
+  
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

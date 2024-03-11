@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="row">
+    <h2>会員一覧</h2>
+
+      <table class="table">
+        <thead>
+        <tr>
+          <th>名前</th>
+          <th>メールアドレス</th>
+          <th>ステータス</th>
+        </tr>
+      </thead>
+        <% @users.each do |user| %>
+          <tr>
+            <td><%= link_to user.name, admin_user_management_path(user) %></td>
+            <td><%= user.email %></td>
+            <td class="<%= user.is_deleted ? 'text-gray' : 'text-green' %>"><%= user.is_deleted ? '退会済み' : '有効' %></td>
+        <% end %>
+      </table>
+    </div>
+  </div>

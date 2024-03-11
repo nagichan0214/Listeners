@@ -1,0 +1,13 @@
+<div class="container mt-5">
+  <h2 class="mb-4 text-center"><%= @user.name %>さんのプロフィール</h2>
+
+  <div class="pl-5">
+    <p class="my-3"><strong>氏名 </strong><span style="margin-left:160px;"><%= @user.name %></span></p>
+    <p class="my-3"><strong>メールアドレス </strong><span style="margin-left:80px;"><%= @user.email %></span></p>
+    <p class="my-3"><strong>会員ステータス </strong><span style="margin-left:90px; color:<%= @user.is_deleted ? 'gray' : 'green' %>;"><%= @user.is_deleted ? '退会済み' : '有効' %></span></p>
+    <% if !@user.is_deleted %>
+      <%= link_to '会員削除', admin_user_management_path(@user), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
+    <% end %>
+   
+  </div>
+</div>
