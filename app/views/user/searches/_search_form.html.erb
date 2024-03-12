@@ -1,3 +1,21 @@
+<head>
+    <style>
+    .btn-custom {
+
+    background-color: #fa778d;
+  
+    color: white;
+  
+    /* その他のスタイルプロパティ */
+  
+    }
+  
+    .btn-custom:hover {
+      background: #fff;
+      color: #f93d5d;
+      }
+    </style>
+</head>
 <% if user_signed_in? %>
   <div class="search_form">
     <%= form_with url: user_search_path, local: true, method: :get do |f| %>
@@ -19,7 +37,9 @@
       </div>
       <div class="form-group row">
         <div class="col-6 offset-2">
-          <%= f.submit "検索", class: "btn btn-primary" %>
+          <%= button_tag type: "submit", class: "btn btn-custom rounded-ellipse" do %>
+            <i class="fa-solid fa-magnifying-glass"></i> 検索
+          <% end %>
         </div>
       </div>
     <% end %>

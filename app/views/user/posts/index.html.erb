@@ -1,3 +1,27 @@
+<head>
+  <style>
+    .card {
+      animation: slideIn 1s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    }
+     
+    @keyframes slideIn {
+      0% {
+        transform: translateX(180px);
+        opacity: 0;
+      }
+      100% {
+        transform: translateX(0);
+      }
+      40%,100% {
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+
+
+
+
 <div class="card-list-container py-5">
   <% @posts.each do |post| %>
     <div class="card w-50 mx-auto mt-4 shadow-lg">

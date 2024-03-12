@@ -2,24 +2,26 @@
 <html>
   <head>
     <style>
-    .nav-button {
-  background-color: #007bff;
-  color: white;
-  padding: 8px 16px;
-  border-radius: 5px;
-  border: none;
-  margin-right: 8px ; /* ボタン間の間隔を指定します */
-}
+      .nav-button {
+        background-color: #fa778d;
+        color: white;
+        padding: 8px 16px;
+        border-radius: 5px;
+        border: none;
+        margin-right: 8px ; /* ボタン間の間隔を指定します */
 
-.nav-button:last-child {
-  margin-right: 0; /* 最後のボタンの右側の余白を除去します */
-}
+       }
 
-.nav-button:hover {
-  background-color: #0056b3;
-  color: white;
-}
-</style>
+      .nav-button:last-child {
+        margin-right: 0; /* 最後のボタンの右側の余白を除去します */
+      }
+
+      .nav-button:hover {
+        background: #fff;
+        color: #f93d5d;
+      }
+
+    </style>
     <title>Listeners</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <%= csrf_meta_tags %>
@@ -32,7 +34,7 @@
 
 
 
-  <body class="d-flex flex-column vh-100" style="background-color: #f6fdf6">
+  <body class="d-flex flex-column vh-100 font" style="background-color: #f6fdf6">
     <header class="bg-custom text-white pt-5 pb-4" style="background-color: #a9dce1;">
       <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
@@ -46,7 +48,9 @@
             <ul class="navbar-nav ml-auto">
               <% if user_signed_in? %>
                 <li class="nav-item">
-                  <%= link_to "投稿する", new_user_post_path, class: "nav-button" %>
+                  <%= link_to new_user_post_path, class: 'nav-button' do %>
+                    <i class="fa-solid fa-pen"></i> 投稿する
+                  <% end %>
                 </li>
                 <li class="nav-item">
                   <%= link_to "投稿一覧", user_posts_path, class: "nav-button" %>
