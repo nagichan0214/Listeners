@@ -1,6 +1,25 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <style>
+    .nav-button {
+  background-color: #007bff;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 5px;
+  border: none;
+  margin-right: 8px ; /* ボタン間の間隔を指定します */
+}
+
+.nav-button:last-child {
+  margin-right: 0; /* 最後のボタンの右側の余白を除去します */
+}
+
+.nav-button:hover {
+  background-color: #0056b3;
+  color: white;
+}
+</style>
     <title>Listeners</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <%= csrf_meta_tags %>
@@ -13,8 +32,8 @@
 
 
 
-  <body class="d-flex flex-column vh-100">
-    <header class="shadow-sm">
+  <body class="d-flex flex-column vh-100" style="background-color: #f6fdf6">
+    <header class="bg-custom text-white pt-5 pb-4" style="background-color: #a9dce1;">
       <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
          <a class="navbar-brand p-3" href="/"><%= image_tag('logo.png', style: "max-width: 200px; max-height: 200px;") %></a>
@@ -25,41 +44,36 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ml-auto">
-            <% if user_signed_in? %>
-            <li class="nav-item">
-            <%= link_to "投稿", new_user_post_path %>
-            </li>
-            <li class="nav-item">
-            <%= link_to "マイページ", user_user_path(current_user.id) %>
-            </li>
-            <li class="nav-item">
-            <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-            </li>
-            <% elsif admin_signed_in? %>
-            <li>
-              管理者ページ
-            </li>
-            <li>
-              <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
-            </li>
-            <% else %>
-            <li class="nav-item">
-            <%= link_to "新規登録", new_user_registration_path %>
-            </li>
-            <li class="nav-item">
-            <%= link_to "ログイン", new_user_session_path %>
-            </li>
-
-            <% end %>
-           </ul>
+              <% if user_signed_in? %>
+                <li class="nav-item">
+                  <%= link_to "投稿する", new_user_post_path, class: "nav-button" %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to "投稿一覧", user_posts_path, class: "nav-button" %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to "マイページ", user_user_path(current_user.id), class: "nav-button" %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-button" %>
+                </li>
+              <% else %>
+                <li class="nav-item">
+                  <%= link_to "新規登録", new_user_registration_path, class: "nav-button" %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to "ログイン", new_user_session_path, class: "nav-button" %>
+                </li>
+              <% end %>
+            </ul>
           </div>
         </div>
       </nav>
     </header>
     <main class="mb-auto">
-    <%= yield %>
+      <%= yield %>
     </main>
-    <footer class="bg-dark text-white pt-5 pb-4">
+    <footer class="bg-custom text-white pt-5 pb-4" style="background-color: #a9dce1;">
       <div class="container">
         <div class="row no-gutters">
           <div class="col-md-4">

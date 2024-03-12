@@ -1,3 +1,19 @@
+.nav-button {
+  background-color: #007bff;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 5px;
+  border: none;
+  margin-right: 8px; /* ボタン間の間隔を指定します */
+}
+
+.nav-button:last-child {
+  margin-right: 0; /* 最後のボタンの右側の余白を除去します */
+}
+
+.nav-button:hover {
+  background-color: #0056b3;
+}
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.

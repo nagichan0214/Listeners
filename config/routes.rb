@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
   
+  namespace :user do
+    get 'relationships/followings'
+    get 'relationships/followers'
+  end
   devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
   sessions: "admin/sessions"
 }
@@ -25,6 +29,9 @@ Rails.application.routes.draw do
       member do
         get :favorites 
       end
+      resource :relationships, only: [:create, :destroy]
+      get 'followings' => 'relationships#followings', as: 'followings'
+      get 'followers' => 'relationships#followers', as: 'followers'
     end
     
     get '/users/:id/unsubscribe' => 'users#unsubscribe', as: 'unsubscribe'

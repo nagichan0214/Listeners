@@ -1,10 +1,27 @@
 <% if user_signed_in? %>
   <div class="search_form">
     <%= form_with url: user_search_path, local: true, method: :get do |f| %>
-      <%= f.text_field :word %>
-      <%= f.select :range, options_for_select([['User'], ['Post']]) %>
-      <%= f.select :search, options_for_select([["完全一致","perfect_match"], ["前方一致","forward_match"],  ["後方一致","backward_match"], ["部分一致","partial_match"]]) %>
-      <%= f.submit "検索", class: "btn btn-primary" %>
+      <div class="form-group row">
+        <%= f.label :word, "Word", class: "col-2 col-form-label" %>
+        <div class="col-4">
+          <%= f.text_field :word, class: "form-control" %>
+        </div>
+        <%= f.label :range, "Range", class: "col-2 col-form-label" %>
+        <div class="col-4">
+          <%= f.select :range, options_for_select([['User'], ['Post']]), {}, { class: "form-select" } %>
+        </div>
+      </div>
+      <div class="form-group row">
+        <%= f.label :search, "Search", class: "col-2 col-form-label" %>
+        <div class="col-4">
+          <%= f.select :search, options_for_select([["完全一致","perfect_match"], ["前方一致","forward_match"],  ["後方一致","backward_match"], ["部分一致","partial_match"]]), {}, { class: "form-select" } %>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-6 offset-2">
+          <%= f.submit "検索", class: "btn btn-primary" %>
+        </div>
+      </div>
     <% end %>
   </div>
 <% end %>

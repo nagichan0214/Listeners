@@ -3,6 +3,20 @@
   <%= image_tag @user.get_profile_image(100,100) %>
   <h3><%= @user.name %></h3>
   <h3><%= @user.introduction %></h3>
+  <h3>follows</h3>
+  <%= link_to user_user_followings_path(@user) do %>
+    <%= @user.followings.count %>
+  <% end %>
+  <h3>followers</h3>
+  <%= link_to user_user_followers_path(@user) do %>
+    <%= @user.followers.count %>
+  <% end %>
+  
+  <% if current_user.following?(@user) %>
+    <p><%= link_to "フォロー中", user_user_relationships_path(@user.id), method: :delete %></p>
+  <% else %>
+    <p><%= link_to "フォローする", user_user_relationships_path(@user.id), method: :post %></p>
+  <% end %>
   <p><%= link_to "いいねした投稿", favorites_user_user_path %></p>
   <% if @user == current_user && !@user.guest_user? %>
     <p><%= link_to "プロフィール編集", edit_user_user_path %></p>

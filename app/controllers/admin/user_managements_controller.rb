@@ -12,5 +12,5 @@ class Admin::UserManagementsController < ApplicationController
   @user = User.find(params[:id])
   @user.update(is_deleted: true)
   redirect_to admin_user_managements_path, notice: "ユーザーを削除しました"
-end
+  end
 end
