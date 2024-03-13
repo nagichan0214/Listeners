@@ -1,40 +1,132 @@
-<!-- ユーザーの詳細 -->
-<div>
-  <%= image_tag @user.get_profile_image(100,100) %>
-  <h3><%= @user.name %></h3>
-  <h3><%= @user.introduction %></h3>
-  <h3>follows</h3>
-  <%= link_to user_user_followings_path(@user) do %>
-    <%= @user.followings.count %>
-  <% end %>
-  <h3>followers</h3>
-  <%= link_to user_user_followers_path(@user) do %>
-    <%= @user.followers.count %>
-  <% end %>
-  
-  <% if current_user.following?(@user) %>
-    <p><%= link_to "フォロー中", user_user_relationships_path(@user.id), method: :delete %></p>
-  <% else %>
-    <p><%= link_to "フォローする", user_user_relationships_path(@user.id), method: :post %></p>
-  <% end %>
-  <p><%= link_to "いいねした投稿", favorites_user_user_path %></p>
-  <% if @user == current_user && !@user.guest_user? %>
-    <p><%= link_to "プロフィール編集", edit_user_user_path %></p>
-    <p><%= link_to "退会する", user_unsubscribe_path %></p>
-  <% end %>
-</div>
+<head>
+  <style>
+    .card {
+      animation: slideIn 1s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    }
+     
+    @keyframes slideIn {
+      0% {
+        transform: translateX(180px);
+        opacity: 0;
+      }
+      100% {
+        transform: translateX(0);
+      }
+      40%,100% {
+        opacity: 1;
+      }
+    }
+    
+    .large-column {
+      width: 70%;
+      font-size: 1.3em; /* 1.3倍のフォントサイズに設定 */
+    }
+  </style>
+</head>
 
-<!-- ユーザーの投稿一覧 -->
-<% @posts.each do |post| %>
-  <div>
-    <%= link_to user_post_path(post.id) do %>
-      <% if post.get_image.present? %>
-        <%= image_tag post.get_image %>
-      <% end %>
-    <p>投稿ユーザー画像：<%= image_tag post.user.get_profile_image(100,100) %></p>
-    <p>タイトル：<%= post.title %></p>
-    <p>内容：<%= post.body %></p>
-    <p>ユーザーネーム：<%= post.user.name %></p>
+
+
+
+
+
+
+<div class="container px-5 px-sm-0">
+  <div class="row justify-content-center">
+    <div class="col-md-9">
+      <table class="table table-lg">
+        <tr>
+          <td><%= image_tag @user.get_profile_image(200,200), style: "border-radius: 50%;" %></td>
+          <td>
+            <table class="sub-table">
+              <tr>
+                <th class="large-column">name</th>
+                <td class="large-column"><%= @user.name %></td>
+              </tr>
+              <tr>
+                <th class="large-column">introduction</th>
+                <td class="large-column"><%= @user.introduction %></td>
+              </tr>
+              <tr>
+                <th class="large-column">follows</th>
+                <td class="large-column">
+                  <%= link_to user_user_followings_path(@user) do %>
+                    <%= @user.followings.count %>
+                  <% end %>
+                </td>
+              </tr>
+              <tr>
+                <th class="large-column">followers</th>
+                <td class="large-column">
+                  <%= link_to user_user_followers_path(@user) do %>
+                    <%= @user.followers.count %>
+                  <% end %>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+      
+
+      
+    
+  
+    <% if current_user.following?(@user) %>
+      <p><%= link_to "フォロー中", user_user_relationships_path(@user.id), method: :delete %></p>
+    <% else %>
+      <p><%= link_to "フォローする", user_user_relationships_path(@user.id), method: :post %></p>
+    <% end %>
+    <p><%= link_to "いいねした投稿", favorites_user_user_path %></p>
+    <% if @user == current_user && !@user.guest_user? %>
+      <p><%= link_to "プロフィール編集", edit_user_user_path %></p>
+      <p><%= link_to "退会する", user_unsubscribe_path %></p>
     <% end %>
   </div>
-<% end %>
+  
+  <!-- ユーザーの投稿一覧 -->
+  <div class="card-list-container py-5">
+    <% @posts.each do |post| %>
+      <div class="card w-50 mx-auto mt-4 shadow-lg">
+          <% if post.get_image.present? %>
+            <%= image_tag post.get_image %>
+          <% end %>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-2">
+                  <p><%= image_tag post.user.get_profile_image(100,100), style: "border-radius: 50%;" %></p>
+                </div>
+                <div class="col-10">
+                  <p class="card-title">
+                    <strong><p>ユーザーネーム：<%= link_to post.user.name, user_user_path(post.user) %></p></strong>
+                  </p>
+                  <p class="card-title">
+                    <%= link_to user_post_path(post.id) do %>
+                      <p>タイトル：<%= post.title %></p>
+                    <% end %>
+                  </p>
+                  <p class="card-text">内容：<%= post.body %></p>
+                  
+                  <% if post.favorited_by?(current_user) %>
+                    <p>
+                      <%= link_to user_post_favorite_path(post), method: :delete do %>
+                        ♥<%= post.favorites.count %> いいね
+                      <% end %>
+                    </p>
+                    <% else %>
+                    <p>
+                      <%= link_to user_post_favorite_path(post), method: :post do %>
+                        ♡<%= post.favorites.count %> いいね
+                      <% end %>
+                    </p>
+                  <% end %>
+                  <p><%= link_to "#{post.post_comments.count} コメント", user_post_path(post.id) %></p>
+                </div>
+              </div>
+            </div>    
+      </div>
+    <% end %>
+  </div>
+     
+      
+  </div>
+</div>
