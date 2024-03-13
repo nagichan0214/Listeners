@@ -32,11 +32,13 @@
 
 <div class="container px-5 px-sm-0">
   <div class="row justify-content-center">
-    <div class="col-md-9">
+    <div class="col-md-12">
       <table class="table table-lg">
-        <tr>
-          <td><%= image_tag @user.get_profile_image(200,200), style: "border-radius: 50%;" %></td>
-          <td>
+        <tr class="row">
+          
+          
+          <td class="col-md-2 offset-md-2 mr-5"><%= image_tag @user.get_profile_image(200,200), style: "border-radius: 50%;" %></td>
+          <td class="col-md-7">
             <table class="sub-table">
               <tr>
                 <th class="large-column">name</th>
@@ -71,9 +73,9 @@
       
     
   
-    <% if current_user.following?(@user) %>
+    <% if current_user != @user && current_user.following?(@user) %>
       <p><%= link_to "フォロー中", user_user_relationships_path(@user.id), method: :delete %></p>
-    <% else %>
+    <% elsif current_user != @user %>
       <p><%= link_to "フォローする", user_user_relationships_path(@user.id), method: :post %></p>
     <% end %>
     <p><%= link_to "いいねした投稿", favorites_user_user_path %></p>
