@@ -3,7 +3,7 @@
     .card {
       animation: slideIn 1s cubic-bezier(0.25, 1, 0.5, 1) forwards;
     }
-     
+
     @keyframes slideIn {
       0% {
         transform: translateX(180px);
@@ -16,7 +16,7 @@
         opacity: 1;
       }
     }
-    
+
     .large-column {
       width: 70%;
       font-size: 1.3em; /* 1.3倍のフォントサイズに設定 */
@@ -35,8 +35,8 @@
     <div class="col-md-12">
       <table class="table table-lg">
         <tr class="row">
-          
-          
+
+
           <td class="col-md-2 offset-md-2 mr-5"><%= image_tag @user.get_profile_image(200,200), style: "border-radius: 50%;" %></td>
           <td class="col-md-7">
             <table class="sub-table">
@@ -68,26 +68,42 @@
           </td>
         </tr>
       </table>
-      
 
-      
-    
-  
+
+
+
+
     <% if current_user != @user && current_user.following?(@user) %>
       <p><%= link_to "フォロー中", user_user_relationships_path(@user.id), method: :delete %></p>
     <% elsif current_user != @user %>
       <p><%= link_to "フォローする", user_user_relationships_path(@user.id), method: :post %></p>
     <% end %>
+
+    <% unless @user.id == current_user.id %>
+      <% if (current_user.following? @user) && (@user.following? current_user)  %>
+        <% if @isRoom == true %>
+          <p class="user-show-room"><%= link_to "チャットへ", user_room_path(@room.id), class: "btn btn-primary btn-lg" %></p>
+        <% else %>
+          <%= form_with url: user_rooms_path do |f| %>
+            <%= f.fields_for :entry do |e| %>
+              <%= e.hidden_field :user_id, value: @user.id %>
+            <% end %>
+            <%= f.submit "DMする", class: "btn btn-primary btn-lg user-show-chat" %>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+
     <p><%= link_to "いいねした投稿", favorites_user_user_path %></p>
     <% if @user == current_user && !@user.guest_user? %>
       <p><%= link_to "プロフィール編集", edit_user_user_path %></p>
       <p><%= link_to "退会する", user_unsubscribe_path %></p>
     <% end %>
   </div>
-  
+
   <!-- ユーザーの投稿一覧 -->
   <div class="card-list-container py-5">
-    <% @posts.each do |post| %>
+    <% @posts.sort_by(&:created_at).reverse.each do |post| %>
       <div class="card w-50 mx-auto mt-4 shadow-lg">
           <% if post.get_image.present? %>
             <%= image_tag post.get_image %>
@@ -107,7 +123,7 @@
                     <% end %>
                   </p>
                   <p class="card-text">内容：<%= post.body %></p>
-                  
+
                   <% if post.favorited_by?(current_user) %>
                     <p>
                       <%= link_to user_post_favorite_path(post), method: :delete do %>
@@ -124,11 +140,11 @@
                   <p><%= link_to "#{post.post_comments.count} コメント", user_post_path(post.id) %></p>
                 </div>
               </div>
-            </div>    
+            </div>
       </div>
     <% end %>
   </div>
-     
-      
+
+
   </div>
 </div>

@@ -38,6 +38,9 @@ Rails.application.routes.draw do
     patch '/users/:id/withdrawal' => 'users#withdrawal', as: 'withdrawal'
 
     get "search" => "searches#search"
+    
+    resources :messages, only: [:create]
+    resources :rooms, only: [:create,:show]
   end
 
   namespace :admin do
