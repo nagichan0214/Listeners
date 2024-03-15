@@ -15,6 +15,7 @@
           <% end %>
         </tr>
       <% end %>
+      <%= paginate @users %>
     </tbody>
   <% else %>
     <!--検索対象モデルがUserではない時(= 検索対象モデルがPostの時) -->
@@ -25,6 +26,7 @@
           <td><%= post.body %></td>
         </tr>
       <% end %>
+      <%= paginate @posts %>
     </tbody>
   <% end %>
 </table>

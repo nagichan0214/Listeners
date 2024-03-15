@@ -1,7 +1,47 @@
+<head>
+  <style>
+    h5 {
+    position: relative;
+    padding: 0.8rem 0;
+    margin-bottom: 0.2rem;
+    border-bottom: 5px solid lightgray;
+    color: gray;
+    font-weight: bold;
+    font-size: 26px;
+    text-align: center;
+}
+
+h5:before,
+h5:after {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    content: "";
+    height: 0;
+    width: 0;
+}
+
+h5:before {
+    border: 16px solid;
+    border-color: transparent;
+    border-top-color: lightgray;
+    margin-left: -16px;
+}
+
+h5:after {
+    border: 10px solid;
+    border-color: transparent;
+    border-top-color: white;
+    margin-left: -10px;
+}
+  </style>
+</head>
+
+
 <div class="container">
   <div class="row no-gutters">
     <div class="col-md-5 col-sm-10 mx-2 mx-sm-auto shadow-lg rounded px-0 my-5">
-      <h5 class="text-dark bg-light p-4 mb-0">演奏会はどうでしたか？</h5>
+      <h5 class="text-gray bg-light p-4 mb-0">演奏会はどうでしたか？</h5>
       <div class="form-body p-4">
         <%= form_with model: @post, url: user_posts_path, method: :post do |f| %>
 

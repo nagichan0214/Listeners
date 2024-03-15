@@ -20,7 +20,32 @@
     .large-column {
       width: 70%;
       font-size: 1.3em; /* 1.3倍のフォントサイズに設定 */
+      color: gray;
     }
+
+    .table-xl {
+
+      width: 500px;
+
+      height: 300px;
+    }
+
+    .cute-button {
+  background-color: #72d7e0;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  font-size: 16px;
+}
+
+.cute-button:hover {
+  background: #fff;
+  color: #72d7e0;
+}
+
+
   </style>
 </head>
 
@@ -37,7 +62,14 @@
         <tr class="row">
 
 
-          <td class="col-md-2 offset-md-2 mr-5"><%= image_tag @user.get_profile_image(200,200), style: "border-radius: 50%;" %></td>
+          <td class="col-md-2 offset-md-2 mr-5">
+            <%= image_tag @user.get_profile_image(200,200), style: "border-radius: 50%;" %>
+            <% if current_user != @user && current_user.following?(@user) %>
+              <%= link_to "フォロー中", user_user_relationships_path(@user.id), method: :delete, class: "cute-button" %>
+            <% elsif current_user != @user %>
+              <%= link_to "フォローする", user_user_relationships_path(@user.id), method: :post, class: "cute-button" %>
+            <% end %>
+          </td>
           <td class="col-md-7">
             <table class="sub-table">
               <tr>
@@ -64,6 +96,13 @@
                   <% end %>
                 </td>
               </tr>
+              <tr>
+                <td class="large-column">
+                  <%= link_to favorites_user_user_path, class: 'btn', style: 'background-color: #f29e60; color: white;' do %>
+                    <i class="fa-regular fa-heart"></i> いいねした投稿
+                  <% end %>
+                </td>
+              </tr>
             </table>
           </td>
         </tr>
@@ -73,11 +112,7 @@
 
 
 
-    <% if current_user != @user && current_user.following?(@user) %>
-      <p><%= link_to "フォロー中", user_user_relationships_path(@user.id), method: :delete %></p>
-    <% elsif current_user != @user %>
-      <p><%= link_to "フォローする", user_user_relationships_path(@user.id), method: :post %></p>
-    <% end %>
+    
 
     <% unless @user.id == current_user.id %>
       <% if (current_user.following? @user) && (@user.following? current_user)  %>
@@ -94,11 +129,12 @@
       <% end %>
     <% end %>
 
-    <p><%= link_to "いいねした投稿", favorites_user_user_path %></p>
-    <% if @user == current_user && !@user.guest_user? %>
-      <p><%= link_to "プロフィール編集", edit_user_user_path %></p>
-      <p><%= link_to "退会する", user_unsubscribe_path %></p>
-    <% end %>
+    
+      <% if @user == current_user && !@user.guest_user? %>
+        <%= link_to "プロフィール編集", edit_user_user_path, class: 'btn', style: 'background-color: #d3d3d3; color: white;' %>
+        
+        <%= link_to "退会する", user_unsubscribe_path, class: 'btn', style: 'background-color: #d3d3d3; color: white;' %>
+      <% end %>
   </div>
 
   <!-- ユーザーの投稿一覧 -->
@@ -143,6 +179,7 @@
             </div>
       </div>
     <% end %>
+    <%= paginate @posts %>
   </div>
 
 

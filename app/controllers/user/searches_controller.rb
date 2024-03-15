@@ -5,9 +5,9 @@ class User::SearchesController < ApplicationController
     @range = params[:range]
 
     if @range == "User"
-      @users = User.looks(params[:word])
+      @users = User.looks(params[:word]).page(params[:page])
     else
-      @posts = Post.looks(params[:word])
+      @posts = Post.looks(params[:word]).page(params[:page])
     end
     
   end
