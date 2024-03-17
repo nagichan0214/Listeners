@@ -16,6 +16,13 @@
         opacity: 1;
       }
     }
+    
+    .pagination-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 35px;
+    }
+    
   </style>
 </head>
 
@@ -31,37 +38,43 @@
           <div class="card-body">
             <div class="row">
               <div class="col-2">
-                <p><%= image_tag post.user.get_profile_image(100,100), style: "border-radius: 50%;" %></p>
+                <%= image_tag post.user.get_profile_image(100,100), style: "border-radius: 50%;" %><
               </div>
               <div class="col-10">
                 <p class="card-title">
                   <strong><p>ユーザーネーム：<%= link_to post.user.name, user_user_path(post.user) %></p></strong>
                 </p>
-                <p class="card-title">
-                  <%= link_to user_post_path(post.id) do %>
-                    <p>タイトル：<%= post.title %></p>
+                <p class="card-title" style="font-size: 30px;">
+                  <%= link_to user_post_path(post.id), style: "color: #53a8b7;" do %>
+                    <%= post.title %>
                   <% end %>
                 </p>
-                <p class="card-text">内容：<%= post.body %></p>
+                <p class="card-text" style="font-size: 20px;"><%= post.body %></p>
                 
                 <% if post.favorited_by?(current_user) %>
                   <p>
-                    <%= link_to user_post_favorite_path(post), method: :delete do %>
-                      ♥<%= post.favorites.count %> いいね
+                    <%= button_to user_post_favorite_path(post), method: :delete, class: "btn btn-outline-primary", style: "background-color: #fdc1cb; color: white;" do %>
+                      ♥ <%= post.favorites.count %> いいね
                     <% end %>
                   </p>
-                  <% else %>
+                <% else %>
                   <p>
-                    <%= link_to user_post_favorite_path(post), method: :post do %>
-                      ♡<%= post.favorites.count %> いいね
+                    <%= button_to user_post_favorite_path(post), method: :post, class: "btn btn-outline-primary", style: "background-color: #fdc1cb; color: white;" do %>
+                      ♡ <%= post.favorites.count %> いいね
                     <% end %>
                   </p>
                 <% end %>
-                <p><%= link_to "#{post.post_comments.count} コメント", user_post_path(post.id) %></p>
+
+                <p>
+                  <%= link_to "#{post.post_comments.count} コメント", user_post_path(post.id), class: "btn btn-secondary" %>
+                </p>
               </div>
             </div>
           </div>    
     </div>
   <% end %>
-  <%= paginate @posts %>
+    <div class="pagination-container">
+      <%= paginate @posts %>
+    </div>
+  
 </div>

@@ -8,6 +8,6 @@
     <% if !@user.is_deleted %>
       <%= link_to '会員削除', admin_user_management_path(@user), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
     <% end %>
-   
+    <div style="margin-bottom: 20px;"></div>
   </div>
 </div>

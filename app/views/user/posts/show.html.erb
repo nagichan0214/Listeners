@@ -1,6 +1,4 @@
 <head>
-  
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <style>
     .mystyle-form {
       background-color: #f8f9fa;
@@ -8,6 +6,7 @@
       padding: 15px;
       border-radius: 8px;
       max-width: 500px;
+      margin-top: 40px;
     }
 
     .mystyle-textarea {
@@ -16,65 +15,120 @@
       padding: 10px;
       resize: none;
     }
+
+    .balloon1-left {
+
+      position: relative;
+      display: inline-block;
+      margin: 2em 0 1.5em 15px;
+      padding: 7px 10px;
+      min-width: 120px;
+      max-width: 100%;
+      color: #555;
+      font-size: 16px;
+      background: #e0edff;
+    }
+
+    .balloon1-left:before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: -30px;
+      margin-top: -15px;
+      border: 15px solid transparent;
+      border-right: 15px solid #e0edff;
+    }
+
+    .balloon1-left p {
+      margin: 0;
+      padding: 0;
+    }
+
+    .text {
+      color: gray;
+    }
   </style>
 </head>
 
 
 
 <body>
-  <div class="container mt-5">
-    <div>
+  <div class="card-list-container py-5 w-100">
+    <div class="card w-50 mx-auto mt-4 shadow-lg">
       <% if @post.get_image.present? %>
-        <%= image_tag post.get_image %>
+        <%= image_tag @post.get_image %>
       <% end %>
-      <p>タイトル：<%= @post.title %></p>
-      <p>内容：<%= @post.body %></p>
-      <p>投稿ユーザー画像：<%= image_tag @post.user.get_profile_image(100,100) %></p>
-      <p>ユーザーネーム：<%= @post.user.name %></p>
-      <p>投稿日：<%= @post.created_at.strftime('%Y/%m/%d') %></p>
-      <% if @post.user == current_user %>
-        <%= link_to "編集", edit_user_post_path(@post.id) %>
-        <%= link_to "削除", user_post_path(@post), method: :delete %>
-      <% end %>
-      <% if @post.favorited_by?(current_user) %>
-        <p>
-          <%= link_to user_post_favorite_path(@post), method: :delete do %>
-            ♥<%= @post.favorites.count %> いいね
-          <% end %>
-        </p>
-        <% else %>
-        <p>
-          <%= link_to user_post_favorite_path(@post), method: :post do %>
-            ♡<%= @post.favorites.count %> いいね
-          <% end %>
-        </p>
-      <% end %>
-    </div>
-    
-    <div>
-      <p>コメント件数：<%= @post.post_comments.count %></p>
-      <% @post.post_comments.each do |post_comment| %>
-        <p><%= image_tag post_comment.user.get_profile_image(100,100) %></p>
-        <%= post_comment.user.name %>
-        <%= post_comment.created_at.strftime('%Y/%m/%d') %><%= post_comment.comment %>
-        <% if post_comment.user == current_user %>
-          <%= link_to "削除", user_post_post_comment_path(post_comment.post, post_comment), method: :delete %>
-        <% end %>
-      <% end %>
-    </div>
+      <div class="card-body text">
+        <div class="row">
+          <div class="col-2 text-center">
+            <%= image_tag @post.user.get_profile_image(100,100), style: "border-radius: 50%;" %>
+          </div>
+          <div class="col-10 pl-sm-4">
+            <p class="card-title">
+              <strong>ユーザーネーム：<%= @post.user.name %></strong>
+            </p>
+            <p class="card-title">
+              <div style="font-size: 30px; border-bottom: 5px solid #a9dce1;">
+                <%= @post.title %>
+              </div>
+            </p>
+              <br>
+            <p class="card-text">
+              <%= @post.body %><br><br>
+              <span style="font-size: 12px;">投稿日：<%= @post.created_at.strftime('%Y/%m/%d') %>
+            </p>
+            <br>
+            <br>
+            <p>
+              <% if @post.user == current_user %>
+                <%= link_to "編集", edit_user_post_path(@post.id), class: "btn btn-primary btn-sm" %>
+                <%= link_to "削除", user_post_path(@post), method: :delete, class: "btn btn-danger btn-sm" %>
+              <% end %>
+            </p>
+            <% if @post.favorited_by?(current_user) %>
+              <p>
+                <%= link_to user_post_favorite_path(@post), method: :delete do %>
+                  ♥<%= @post.favorites.count %> いいね
+                <% end %>
+              </p>
+              <% else %>
+              <p>
+                <%= link_to user_post_favorite_path(@post), method: :post do %>
+                  ♡<%= @post.favorites.count %> いいね
+                <% end %>
+              </p>
+            <% end %>
+            <p>コメント：<%= @post.post_comments.count %> 件</p>
 
-    <div class="mystyle-form">
-      <%= form_with model: [:user, @post, @post_comment], html: { class: "my-form" } do |f| %>
-        <div class="form-group">
-          <%= image_tag current_user.get_profile_image(50,50) %>
-          <%= f.label :comment, "コメント" %>
-          <%= f.text_area :comment, rows: '3', class: "form-control mystyle-textarea", placeholder: "コメントを書く" %>
+
+            <% @post.post_comments.each do |post_comment| %>
+  <%= image_tag post_comment.user.get_profile_image(50,50), style: "border-radius: 50%;" %>
+  <%= post_comment.user.name %>
+  <div class="balloon1-left">
+    <%= post_comment.comment %><br>
+    <%= post_comment.created_at.strftime('<span style="font-size: 12px;">%Y/%m/%d</span>').html_safe %>
+    <% if post_comment.user == current_user %>
+      <%= link_to "削除", user_post_post_comment_path(post_comment.post, post_comment), method: :delete %>
+    <% end %>
+  </div>
+  <br>
+<% end %>
+
+
+            <div class="mystyle-form">
+              <%= form_with model: [:user, @post, @post_comment], html: { class: "my-form" } do |f| %>
+                <div class="form-group">
+                  <%= f.label :comment, "コメント" %>
+                  <%= f.text_area :comment, rows: '3', class: "form-control mystyle-textarea", placeholder: "コメントを書く" %>
+                </div>
+                <%= f.button class: "btn btn-primary" do %>
+                  送信 <i class="fa-solid fa-paper-plane"></i>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
         </div>
-        <%= f.button class: "btn btn-primary" do %>
-          送信 <i class="fa-solid fa-paper-plane"></i>
-        <% end %>
-      <% end %>
+      </div>
     </div>
-
   </div>
 </body>

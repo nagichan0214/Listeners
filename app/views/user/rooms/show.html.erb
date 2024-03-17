@@ -1,21 +1,71 @@
-<% @entries.each do |e| %>
-  <% if @myUserId != e.user.id %>
-      <h2><%= e.user.name %>さんとのトークルーム</h2>
-    </div>
-  <% end %>
-<% end %>
-<%= link_to "ユーザー一覧に戻る", user_users_path %>
+<head>
+  <style>
+    .text {
+      color: gray;
+    }
+    
+  </style>
+</head>
 
-  <% if @messages.present? %>
-    <% @messages.each do |m| %>
-      <% @myUserId == m.user.id  %>
-      <p><%= m.user.name %></p>
-        <p><%= m.message %></p>
+
+
+
+<div class="row text">
+  <div class="col-3"></div>
+
+  <div class="col-6">
+    <div class="page-header">
+
+      <h3>
+        <% @entries.each do |e| %>
+          <% if @myUserId != e.user.id %>
+              <%= e.user.name %>さんとのトークルーム
+          <% end %>
+        <% end %>
+      </h3>
+    </div>
+
+    <table class="table text">
+      <thead>
+        <tr>
+          <th>送信者</th>
+          <th>メッセージ</th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% if @messages.present? %>
+          <% @messages.each do |m| %>
+            <tr>
+              <% @myUserId == m.user.id  %>
+              <td><%= m.user.name %></td>
+              <td><%= m.message %></td>
+            </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="col-3"></div>
+</div>
+
+<div class="row">
+  <div class="col-3"></div>
+
+  <div class="col-6">
+    <%= form_with model: @message, url: user_messages_path do |f| %>
+      <div class="col-10">
+        <%= f.text_field :message, placeholder: "メッセージを入力" , class: 'form-control' %>
+        <%= f.hidden_field :room_id, value: @room.id %>
+      </div>
+
+      <div class="col-2">
+        <%= f.submit "送信", class: 'btn btn-info btn-block' %>
+      </div>
     <% end %>
-  <% end %>
-   
-  <%= form_with model: @message, url: user_messages_path do |f| %>
-    <%= f.text_field :message, placeholder: "メッセージを入力してください" , size: 50, class:"form-text-field" %>
-    <%= f.hidden_field :room_id, value: @room.id %>
-    <%= f.submit "送信", class: 'form-submit' %>
-<% end %>
+  </div>
+
+  <div class="col-3"></div>
+</div>

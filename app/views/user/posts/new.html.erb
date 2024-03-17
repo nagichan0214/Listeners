@@ -37,6 +37,15 @@ h5:after {
   </style>
 </head>
 
+<% if @post.errors.any? %>
+  <%= @post.errors.count %>件のエラーが発生しました
+  <ul>
+    <% @post.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
 
 <div class="container">
   <div class="row no-gutters">
@@ -47,7 +56,7 @@ h5:after {
 
           <style>
           .btn-outline-secondary {
-            border-color: #a5b8c1; 
+            border-color: #a5b8c1;
           }
           </style>
           <label for="file-upload" class="btn btn-outline-secondary btn-block">
@@ -55,7 +64,7 @@ h5:after {
             画像をアップロード
           </label>
           <%= f.file_field :image, accept: "image/*", id: "file-upload", style: "display: none;" %>
-          
+
           <div class="input-group mb-3 mt-4">
             <div class="input-group-prepend">
               <span class="input-group-text" aria-hidden="true"><i class="fa-solid fa-music"></i></span>

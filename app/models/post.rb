@@ -1,5 +1,10 @@
 class Post < ApplicationRecord
   has_one_attached :image
+  
+  validates :title, length:{ maximum: 30 }, presence: true
+  validates :body, length:{ maximum: 140 }, presence: true
+
+  
   belongs_to :user
   has_many :post_comments, dependent: :destroy
   has_many :favorites, dependent: :destroy

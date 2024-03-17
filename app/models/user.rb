@@ -17,6 +17,10 @@ class User < ApplicationRecord
   
   has_one_attached :profile_image
   
+  validates :name, length:{ minimum: 2, maximum: 20 }, presence: true
+  validates :introduction, length:{ maximum: 50 }
+  
+  
   def active_for_authentication?
     super && (is_deleted == false)
   end

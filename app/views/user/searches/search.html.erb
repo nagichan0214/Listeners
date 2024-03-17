@@ -1,32 +1,78 @@
-<h2>検索結果</h2>
+<head>
+  <style>
 
-<table class="table table-hover table-inverse">
-  <!--検索対象モデルがUserの時 -->
-  <% if @range == "User" %>
-    <tbody>
-      <% @users.each do |user| %>
-        <tr>
-          <td><%= link_to user.name, user_user_path(user) %></td>
-          
-          <% if current_user != user && current_user.following?(user) %>
-            <td><%= link_to "フォロー中", user_user_relationships_path(user.id), method: :delete %></td>
-          <% elsif current_user != user %>
-            <td><%= link_to "フォローする", user_user_relationships_path(user.id), method: :post %></td>
-          <% end %>
-        </tr>
-      <% end %>
-      <%= paginate @users %>
-    </tbody>
-  <% else %>
+
+    .pagination-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 35px;
+    }
+    
+    .text {
+      color: gray;
+    }
+  </style>
+</head>
+
+
+
+
+  <div class="card-list-container py-5 text">
+    <h2 class="text-center">検索結果</h2>
+    <div class="card w-50 mx-auto mt-4 shadow-lg">
+      
+    <!--検索対象モデルがUserの時 -->
+      <% if @range == "user" %>
+        <% @users.each do |user| %>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-2">
+                <%= image_tag user.get_profile_image(100,100), style: "border-radius: 50%;" %>
+              </div>
+              <div class="col-10">
+                <p class="card-title">
+                  <strong style="font-size: 20px;"><%= link_to user.name, user_user_path(user) %></strong><br>
+                  <%= user.introduction %> 
+                </p>
+                <p class="card-text">
+                  <% if current_user != user && current_user.following?(user) %>
+                    <td><%= link_to "フォロー中", user_user_relationships_path(user.id), method: :delete %></td>
+                  <% elsif current_user != user %>
+                    <td><%= link_to "フォローする", user_user_relationships_path(user.id), method: :post %></td>
+                  <% end %>
+                </p>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% else %>
     <!--検索対象モデルがUserではない時(= 検索対象モデルがPostの時) -->
-    <tbody>
-      <% @posts.each do |post| %>
-        <tr>
-          <td><%= link_to post.title, user_post_path(post) %></td>
-          <td><%= post.body %></td>
-        </tr>
-      <% end %>
-      <%= paginate @posts %>
-    </tbody>
-  <% end %>
-</table>
+        <% @posts.each do |post| %>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-12">
+                <p class="card-title">
+                  <%= link_to post.title, user_post_path(post) %>
+                </p>
+                <p class="card-title">
+                  <%= post.body %>
+                </p>
+              </div>
+            </div>
+          </div>
+        <% end %>
+    <% end %>
+  </div>
+</div>
+
+
+
+<% if @range == "user" %>
+  <div class="pagination-container">
+    <%= paginate @users %>
+  </div>
+<% else %>
+  <div class="pagination-container">
+    <%= paginate @posts %>
+  </div>
+<% end %>

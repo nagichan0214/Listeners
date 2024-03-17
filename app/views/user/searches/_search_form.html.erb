@@ -3,13 +3,13 @@
     .btn-custom {
 
     background-color: #fa778d;
-  
+
     color: white;
-  
+
     /* その他のスタイルプロパティ */
-  
+
     }
-  
+
     .btn-custom:hover {
       background: #fff;
       color: #f93d5d;
@@ -20,13 +20,13 @@
   <div class="search_form">
     <%= form_with url: user_search_path, local: true, method: :get do |f| %>
       <div class="form-group row">
-        <%= f.label :word, "Word", class: "col-2 col-form-label" %>
+        <%= f.label :word, "", class: "col-2 col-form-label" %>
         <div class="col-4">
-          <%= f.text_field :word, class: "form-control" %>
+          <%= f.search_field :word, class: "form-control", value: params[:word] %>
         </div>
-        <%= f.label :range, "Range", class: "col-2 col-form-label" %>
+        <%= f.label :range, "選択", class: "col-2 col-form-label" %>
         <div class="col-4">
-          <%= f.select :range, options_for_select([['User'], ['Post']]), {}, { class: "form-select" } %>
+          <%= f.select :range, options_for_select([['ユーザー', :user], ['投稿', :post]], params[:range]), {}, { class: "form-select" } %>
         </div>
       </div>
       <div class="form-group row">
