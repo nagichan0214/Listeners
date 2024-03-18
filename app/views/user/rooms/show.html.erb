@@ -4,6 +4,7 @@
       color: gray;
     }
     
+    
   </style>
 </head>
 
@@ -16,10 +17,10 @@
   <div class="col-6">
     <div class="page-header">
 
-      <h3>
+      <h3 style="margin-top: 20px; margin-bottom: 20px; border-bottom: 5px solid #a9dce1;">
         <% @entries.each do |e| %>
           <% if @myUserId != e.user.id %>
-              <%= e.user.name %>さんとのトークルーム
+            <%= e.user.name %>さんとのトークルーム
           <% end %>
         <% end %>
       </h3>

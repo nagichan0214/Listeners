@@ -102,17 +102,17 @@
 
 
             <% @post.post_comments.each do |post_comment| %>
-  <%= image_tag post_comment.user.get_profile_image(50,50), style: "border-radius: 50%;" %>
-  <%= post_comment.user.name %>
-  <div class="balloon1-left">
-    <%= post_comment.comment %><br>
-    <%= post_comment.created_at.strftime('<span style="font-size: 12px;">%Y/%m/%d</span>').html_safe %>
-    <% if post_comment.user == current_user %>
-      <%= link_to "削除", user_post_post_comment_path(post_comment.post, post_comment), method: :delete %>
-    <% end %>
-  </div>
-  <br>
-<% end %>
+              <%= image_tag post_comment.user.get_profile_image(50,50), style: "border-radius: 50%;" %>
+              <%= post_comment.user.name %>
+              <div class="balloon1-left">
+                <%= post_comment.comment %><br>
+                <%= post_comment.created_at.strftime('<span style="font-size: 12px;">%Y/%m/%d</span>').html_safe %>
+                <% if post_comment.user == current_user %>
+                  <%= link_to "削除", user_post_post_comment_path(post_comment.post, post_comment), method: :delete %>
+                <% end %>
+              </div>
+              <br>
+            <% end %>
 
 
             <div class="mystyle-form">

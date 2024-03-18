@@ -1,22 +1,42 @@
-<h1><i class="fa-solid fa-pen-to-square"></i>投稿を編集</h1>
+<head>
+  <style>
+  
+  .text {
+    color: gray;
 
-<%= form_with(model: @post, url: user_post_path(@post.id), method: :patch) do |form| %>
-  <div>
-    <%= form.label :image, "画像のアップロード" %><br>
-    <%= form.file_field :image %>
-  </div>
+  }
 
-  <div>
-    <%= form.label :title, "タイトル" %><br>
-    <%= form.text_field :title %>
-  </div>
+  </style>
+</head>
 
-  <div>
-    <%= form.label :body, "内容" %><br>
-    <%= form.text_area :body %>
-  </div>
-
-  <div>
-    <%= form.submit "更新する" %>
-  </div>
+<% if @post.errors.any? %>
+  <%= @post.errors.count %>件のエラーが発生しました
+  <ul>
+    <% @post.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
 <% end %>
+
+<div class="container">
+  <div class="row no-gutters">
+    <div class="col-md-5 col-sm-10 mx-2 mx-sm-auto shadow-lg rounded px-0 my-5 text">
+      <h5 class="text-gray bg-light p-4 mb-0"><i class="fa-solid fa-pen-to-square"></i>投稿を編集</h5>
+      <div class="form-body p-4 text">
+        <%= form_with(model: @post, url: user_post_path(@post.id), method: :patch) do |form| %>
+          <%= form.label :image, "画像のアップロード" %><br>
+          <%= form.file_field :image %>
+          <div class="input-group mb-3 mt-4">
+            <div class="input-group-prepend">  
+              <span class="input-group-text" aria-hidden="true"><i class="fa-solid fa-music"></i></span>
+            </div>
+            <%= form.text_field :title, class: "form-control", placeholder: "タイトル" %>
+          </div>
+          <%= form.text_area :body, class: "form-control", rows: "6", placeholder: "感想はこちら" %>
+          <hr>
+          <%= form.submit '更新する', class: "btn btn-lg btn-block btn-info rounded-pill mt-4" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

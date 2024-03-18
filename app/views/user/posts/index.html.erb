@@ -23,6 +23,10 @@
       margin-top: 35px;
     }
     
+     .text {
+      color: gray;
+    }
+    
   </style>
 </head>
 
@@ -31,7 +35,7 @@
 
 <div class="card-list-container py-5">
   <% @posts.sort_by(&:created_at).reverse.each do |post| %>
-    <div class="card w-50 mx-auto mt-4 shadow-lg">
+    <div class="card w-50 mx-auto mt-4 shadow-lg text">
         <% if post.get_image.present? %>
           <%= image_tag post.get_image %>
         <% end %>
@@ -42,7 +46,7 @@
               </div>
               <div class="col-10">
                 <p class="card-title">
-                  <strong><p>ユーザーネーム：<%= link_to post.user.name, user_user_path(post.user) %></p></strong>
+                  <strong><p>ユーザーネーム：<%= link_to post.user.name, user_user_path(post.user), style: "color: gray;" %></p></strong>
                 </p>
                 <p class="card-title" style="font-size: 30px;">
                   <%= link_to user_post_path(post.id), style: "color: #53a8b7;" do %>
@@ -53,28 +57,28 @@
                 
                 <% if post.favorited_by?(current_user) %>
                   <p>
-                    <%= button_to user_post_favorite_path(post), method: :delete, class: "btn btn-outline-primary", style: "background-color: #fdc1cb; color: white;" do %>
+                    <%= button_to user_post_favorite_path(post), method: :delete, class: "btn btn-outline-primary btn-sm", style: "background-color: #fdc1cb; color: white;" do %>
                       ♥ <%= post.favorites.count %> いいね
                     <% end %>
                   </p>
                 <% else %>
                   <p>
-                    <%= button_to user_post_favorite_path(post), method: :post, class: "btn btn-outline-primary", style: "background-color: #fdc1cb; color: white;" do %>
+                    <%= button_to user_post_favorite_path(post), method: :post, class: "btn btn-outline-primary btn-sm", style: "background-color: #fdc1cb; color: white;" do %>
                       ♡ <%= post.favorites.count %> いいね
                     <% end %>
                   </p>
                 <% end %>
 
                 <p>
-                  <%= link_to "#{post.post_comments.count} コメント", user_post_path(post.id), class: "btn btn-secondary" %>
+                  <%= link_to "#{post.post_comments.count} コメント", user_post_path(post.id), class: "btn btn-secondary btn-sm" %>
                 </p>
               </div>
             </div>
           </div>    
     </div>
   <% end %>
-    <div class="pagination-container">
-      <%= paginate @posts %>
-    </div>
+  <div class="pagination-container">
+    <%= paginate @posts %>
+  </div>
   
 </div>

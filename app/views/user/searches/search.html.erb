@@ -7,7 +7,7 @@
       justify-content: center;
       margin-top: 35px;
     }
-    
+
     .text {
       color: gray;
     }
@@ -18,9 +18,9 @@
 
 
   <div class="card-list-container py-5 text">
-    <h2 class="text-center">検索結果</h2>
+    <h2 class="text-center text" style="border-bottom: 5px solid #a9dce1;">検索結果</h2>
     <div class="card w-50 mx-auto mt-4 shadow-lg">
-      
+
     <!--検索対象モデルがUserの時 -->
       <% if @range == "user" %>
         <% @users.each do |user| %>
@@ -32,7 +32,7 @@
               <div class="col-10">
                 <p class="card-title">
                   <strong style="font-size: 20px;"><%= link_to user.name, user_user_path(user) %></strong><br>
-                  <%= user.introduction %> 
+                  <%= user.introduction %>
                 </p>
                 <p class="card-text">
                   <% if current_user != user && current_user.following?(user) %>

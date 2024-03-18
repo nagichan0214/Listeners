@@ -1,7 +1,7 @@
 class User::UsersController < ApplicationController
   before_action :authenticate_user!, except: [:top]
   before_action :ensure_guest_user, only: [:edit]
-  
+
   def show
     @user = User.find(params[:id])
     @posts = @user.posts.page(params[:page])
@@ -30,15 +30,19 @@ class User::UsersController < ApplicationController
   end
 
   def update
-    @user = User.find(params[:id])
-    @user.update(user_params)
-    redirect_to user_user_path(@user.id)
+  @user = User.find(params[:id])
+  if @user.update(user_params)
+    redirect_to user_user_path(@user.id), notice: "ユーザー情報を更新しました"
+  else
+    flash.now[:alert] = @user.errors.full_messages.join(", ")
+    render :edit
   end
-  
-  def favorites 
+  end
+
+  def favorites
     @user = User.find(params[:id])
     favorites = Favorite.where(user_id: @user.id).pluck(:post_id)
-    @favorite_posts = Post.find(favorites)
+    @favorite_posts = Post.where(id: favorites).page(params[:page])
   end
 
   def index
@@ -58,13 +62,13 @@ private
   def user_params
     params.require(:user).permit(:name, :profile_image, :introduction)
   end
-    
+
   def ensure_guest_user
     @user = User.find(params[:id])
     if @user.email == "guest@example.com"
       redirect_to user_user_path(current_user) , notice: "ゲストユーザーはプロフィール編集画面へ遷移できません。"
     end
-  end  
+  end
 
 
 end

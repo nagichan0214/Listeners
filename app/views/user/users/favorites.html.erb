@@ -1,11 +1,42 @@
-<table class="table">
-  <tbody>
+<head>
+  <style>
+
+
+    .pagination-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 35px;
+    }
+    
+    .text {
+      color: gray;
+    }
+   
+  </style>
+</head>
+
+<div class="card-list-container py-5 text">
+  <h2 class="text-center text" style="border-bottom: 5px solid #a9dce1;">いいねした投稿</h2>
+  <div class="card w-50 mx-auto mt-4 shadow-lg">
     <% @favorite_posts.each do |post| %>
-    <tr>
-      <td>
-        <%= link_to post.title, user_post_path(post) %>
-      </td>
-    </tr>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-12">
+            <p class="card-title">
+              <%= link_to post.title, user_post_path(post) %>
+            </p>
+            <p class="card-title">
+                <%= post.body %>
+            </p>
+          </div>
+        </div>
+      </div>
     <% end %>
-  </tbody>
-</table>
+  </div>
+</div>
+      
+
+
+<div class="pagination-container">
+  <%= paginate @favorite_posts %>
+</div>

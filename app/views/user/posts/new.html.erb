@@ -34,6 +34,10 @@ h5:after {
     border-top-color: white;
     margin-left: -10px;
 }
+
+.btn-outline-secondary {
+  border-color: #a5b8c1;
+}
   </style>
 </head>
 
@@ -53,12 +57,6 @@ h5:after {
       <h5 class="text-gray bg-light p-4 mb-0">演奏会はどうでしたか？</h5>
       <div class="form-body p-4">
         <%= form_with model: @post, url: user_posts_path, method: :post do |f| %>
-
-          <style>
-          .btn-outline-secondary {
-            border-color: #a5b8c1;
-          }
-          </style>
           <label for="file-upload" class="btn btn-outline-secondary btn-block">
             <i class="fas fa-upload" style="font-size: 40px;"></i><br>
             画像をアップロード
@@ -74,7 +72,7 @@ h5:after {
           <%= f.text_area :body, class: "form-control", rows: "6", placeholder: "感想はこちら" %>
           <hr>
           <%= f.submit 'シェア', class: "btn btn-lg btn-block btn-info rounded-pill mt-4" %>
-          <% end %>
+        <% end %>
       </div>
     </div>
   </div>

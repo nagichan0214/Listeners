@@ -2,8 +2,7 @@ class User::SearchesController < ApplicationController
   before_action :authenticate_user!
 
   def search
-    p @range = params[:range]
-    #byebug
+    @range = params[:range]
     if @range == "user"
       @users = User.looks(params[:word]).page(params[:page])
     else

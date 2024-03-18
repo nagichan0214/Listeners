@@ -156,7 +156,7 @@
                 </div>
                 <div class="col-10 pl-sm-4">
                   <p class="card-title">
-                    <strong>ユーザーネーム：<%= link_to post.user.name, user_user_path(post.user) %></strong>
+                    <strong>ユーザーネーム：<%= link_to post.user.name, user_user_path(post.user), style: "color: gray;" %></strong>
                   </p>
                   <p class="card-title" style="font-size: 30px;">
                     <%= link_to user_post_path(post.id), style: "color: #53a8b7;" do %>
@@ -167,18 +167,18 @@
 
                   <% if post.favorited_by?(current_user) %>
                     <p>
-                      <%= link_to user_post_favorite_path(post), method: :delete do %>
+                      <%= link_to user_post_favorite_path(post), method: :delete, class: "btn btn-outline-primary btn-sm", style: "background-color: #fdc1cb; color: white;" do %>
                         ♥<%= post.favorites.count %> いいね
                       <% end %>
                     </p>
                     <% else %>
                     <p>
-                      <%= link_to user_post_favorite_path(post), method: :post do %>
+                      <%= link_to user_post_favorite_path(post), method: :post, class: "btn btn-outline-primary btn-sm", style: "background-color: #fdc1cb; color: white;" do %>
                         ♡<%= post.favorites.count %> いいね
                       <% end %>
                     </p>
                   <% end %>
-                  <p><%= link_to "#{post.post_comments.count} コメント", user_post_path(post.id) %></p>
+                  <p><%= link_to "#{post.post_comments.count} コメント", user_post_path(post.id), class: "btn btn-secondary btn-sm" %></p>
                 </div>
               </div>
             </div>

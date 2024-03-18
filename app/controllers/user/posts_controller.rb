@@ -29,9 +29,12 @@ class User::PostsController < ApplicationController
   end
 
   def update
-    post = Post.find(params[:id])
-    post.update(post_params)
-    redirect_to user_post_path(post.id)
+    @post = Post.find(params[:id])
+    if @post.update(post_params)
+      redirect_to user_post_path(post.id)
+    else
+      render :edit
+    end
   end
 
   def destroy
