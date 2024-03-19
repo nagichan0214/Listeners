@@ -31,7 +31,6 @@
         <tr>
           <th>送信者</th>
           <th>メッセージ</th>
-          <th></th>
         </tr>
       </thead>
 
@@ -39,7 +38,6 @@
         <% if @messages.present? %>
           <% @messages.each do |m| %>
             <tr>
-              <% @myUserId == m.user.id  %>
               <td><%= m.user.name %></td>
               <td><%= m.message %></td>
             </tr>
