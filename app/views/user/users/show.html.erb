@@ -22,7 +22,7 @@
       font-size: 1.3em; /* 1.3倍のフォントサイズに設定 */
       color: gray;
     }
-    
+
     .text {
      color: gray;
     }
@@ -59,6 +59,20 @@
       margin-top: 35px;
     }
 
+    .btn-hover {
+      background-color: #fdc1cb;
+      
+      color: white
+     
+    }
+    
+    .btn-hover:hover {
+      background-color: #f93d5d;
+      color: #fff
+    
+    }
+    
+   
   </style>
 </head>
 
@@ -73,8 +87,6 @@
     <div class="col-md-12">
       <table class="table table-lg">
         <tr class="row">
-
-
           <td class="col-md-2 offset-md-2 mr-5" >
             <div style="margin-bottom: 20px;">
               <%= image_tag @user.get_profile_image(200,200), style: "border-radius: 50%;" %>
@@ -116,7 +128,7 @@
               <tr>
                 <th class="large-column">follows</th>
                 <td class="large-column">
-                  <%= link_to user_user_followings_path(@user) do %>
+                  <%= link_to user_user_followings_path(@user), style: "color: gray;" do %>
                     <%= @user.followings.count %>
                   <% end %>
                 </td>
@@ -124,7 +136,7 @@
               <tr>
                 <th class="large-column">followers</th>
                 <td class="large-column">
-                  <%= link_to user_user_followers_path(@user) do %>
+                  <%= link_to user_user_followers_path(@user), style: "color: gray;" do %>
                     <%= @user.followers.count %>
                   <% end %>
                 </td>
@@ -140,15 +152,13 @@
           </td>
         </tr>
       </table>
-
-
   <!-- ユーザーの投稿一覧 -->
-  <div class="card-list-container py-5 w-100 ">
-    <% @posts.sort_by(&:created_at).reverse.each do |post| %>
-      <div class="card w-50 mx-auto mt-4 shadow-lg text">
-          <% if post.get_image.present? %>
-            <%= image_tag post.get_image %>
-          <% end %>
+      <div class="card-list-container py-5 w-100 ">
+        <% @posts.sort_by(&:created_at).reverse.each do |post| %>
+          <div class="card w-50 mx-auto mt-4 shadow-lg text">
+            <% if post.get_image.present? %>
+              <%= image_tag post.get_image %>
+            <% end %>
             <div class="card-body">
               <div class="row">
                 <div class="col-2 text-center">
@@ -167,13 +177,13 @@
 
                   <% if post.favorited_by?(current_user) %>
                     <p>
-                      <%= link_to user_post_favorite_path(post), method: :delete, class: "btn btn-outline-primary btn-sm", style: "background-color: #fdc1cb; color: white;" do %>
+                      <%= link_to user_post_favorite_path(post), method: :delete, class: "btn btn-sm btn-hover" do %>
                         ♥<%= post.favorites.count %> いいね
                       <% end %>
                     </p>
                     <% else %>
                     <p>
-                      <%= link_to user_post_favorite_path(post), method: :post, class: "btn btn-outline-primary btn-sm", style: "background-color: #fdc1cb; color: white;" do %>
+                      <%= link_to user_post_favorite_path(post), method: :post, class: "btn btn-sm btn-hover" do %>
                         ♡<%= post.favorites.count %> いいね
                       <% end %>
                     </p>
@@ -182,13 +192,12 @@
                 </div>
               </div>
             </div>
+          </div>
+        <% end %>
+        <div class="pagination-container">
+          <%= paginate @posts %>
+        </div>
       </div>
-    <% end %>
-    <div class="pagination-container">
-      <%= paginate @posts %>
     </div>
-  </div>
-
-
   </div>
 </div>
