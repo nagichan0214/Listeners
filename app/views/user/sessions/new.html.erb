@@ -2,31 +2,32 @@
   <div class="row no-gutters">
     <div class="col-md-5 col-sm-10 mx-2 mx-sm-auto shadow-lg rounded px-0 my-5 text">
       <h5 class="text-gray bg-light p-4 mb-0">Log in</h5>
-  
-      <%= form_with model: @user, url: user_session_path do |f| %>
-      <div class="field">
-        <%= f.label :email %><br />
-        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-      </div>
-      
-      <div class="field">
-        <%= f.label :password %><br />
-        <%= f.password_field :password, autocomplete: "current-password" %>
-      </div>
-      
-      <% if devise_mapping.rememberable? %>
+      <div class="form-body p-4">
+        <%= form_with model: @user, url: user_session_path do |f| %>
         <div class="field">
-          <%= f.check_box :remember_me %>
-          <%= f.label :remember_me %>
+          <%= f.label :email %><br />
+          <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
         </div>
-      <% end %>
-      
-      <div class="actions">
-        <%= f.submit "Log in" %>
-      </div>
-      <% end %>
-      
+        
+        <div class="field">
+          <%= f.label :password %><br />
+          <%= f.password_field :password, autocomplete: "current-password" %>
+        </div>
+        
+        <% if devise_mapping.rememberable? %>
+          <div class="field">
+            <%= f.check_box :remember_me %>
+            <%= f.label :remember_me %>
+          </div>
+        <% end %>
+        
+        <div class="actions">
+          <%= f.submit "Log in" %>
+        </div>
+        <% end %>
+        
       <%= render "user/shared/links" %>
+      </div>
     </div>
   </div>
 </div>
