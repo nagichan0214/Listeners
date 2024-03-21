@@ -89,7 +89,7 @@
         <tr class="row">
           <td class="col-md-2 offset-md-2 mr-5" >
             <div style="margin-bottom: 20px;">
-              <%= image_tag @user.get_profile_image(200,200), style: "border-radius: 50%;" %>
+              <%= image_tag @user.get_profile_image(250,250), style: "border-radius: 50%;" %>
             </div>
             <% if current_user != @user && current_user.following?(@user) %>
               <%= link_to "フォロー中", user_user_relationships_path(@user.id), method: :delete, class: "cute-button" %>
