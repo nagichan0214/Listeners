@@ -17,8 +17,8 @@ class User < ApplicationRecord
 
   has_one_attached :profile_image
 
-  validates :name, length:{ minimum: 2, maximum: 20 }, presence: true
-  validates :introduction, length:{ maximum: 50 }
+  validates :name, length:{ minimum: 2, maximum: 20, too_short: "は2文字以上で入力してください", too_long: "は20文字以下で入力してください" }, presence: { message: "が空です" }
+  validates :introduction, length:{ maximum: 50, too_long: "は50文字以下で入力してください" }
 
 
   def active_for_authentication?

@@ -1,8 +1,8 @@
 class Post < ApplicationRecord
   has_one_attached :image
   
-  validates :title, length:{ maximum: 30 }, presence: true
-  validates :body, length:{ maximum: 140 }, presence: true
+  validates :title, length:{ maximum: 30, too_long: "は%{count}字以下で投稿してください" }, presence: true
+  validates :body, length:{ maximum: 140, too_long: "は%{count}字以下で投稿してください" }, presence: true
 
   
   belongs_to :user

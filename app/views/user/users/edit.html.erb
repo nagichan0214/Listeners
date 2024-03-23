@@ -16,6 +16,16 @@
   <div class="row no-gutters">
     <div class="col-md-5 col-sm-10 mx-2 mx-sm-auto shadow-lg rounded px-0 my-5 text">
       <h5 class="text-gray bg-light p-4 mb-0"><i class="fa-solid fa-pen-to-square"></i>プロフィール編集</h5>
+      
+      <% if @user.errors.any? %>
+        <div id="error_explanation">
+          <ul>
+            <% @user.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
       <div class="form-body p-4 text">
         <%= form_with(model: @user, url: user_user_path(@user.id), method: :patch) do |form| %>
           <label for="inputImage">プロフィール画像</label>  <%= image_tag @user.get_profile_image(100, 100), style: "border-radius: 50%;" %><br>
