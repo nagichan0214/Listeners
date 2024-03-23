@@ -41,20 +41,13 @@ h5:after {
   </style>
 </head>
 
-<% if @post.errors.any? %>
-  <%= @post.errors.count %>件のエラーが発生しました
-  <ul>
-    <% @post.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-    <% end %>
-  </ul>
-<% end %>
 
-
+  
 <div class="container">
   <div class="row no-gutters">
     <div class="col-md-5 col-sm-10 mx-2 mx-sm-auto shadow-lg rounded px-0 my-5">
       <h5 class="text-gray bg-light p-4 mb-0">演奏会はどうでしたか？</h5>
+
       <div class="form-body p-4">
         <%= form_with model: @post, url: user_posts_path, method: :post do |f| %>
           <label for="file-upload" class="btn btn-outline-secondary btn-block">

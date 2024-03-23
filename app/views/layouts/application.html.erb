@@ -35,6 +35,24 @@
         text-decoration: none;
         color: gray;
       }
+      
+      .flash-message {
+        border-radius: 5px;
+        padding: 16px 24px;
+        margin: 16px 0px;
+      }
+       
+      .flash-message.notice {
+        background-color: #a9dce1;
+        color: #fff;
+        border: solid 1px #0067C0;
+      }
+       
+      .flash-message.alert {
+        background-color: #fc9eae;
+        color: #fff;
+        border: solid 1px #930403;
+      }
 
     </style>
     <title>Listeners</title>
@@ -105,6 +123,9 @@
       </nav>
     </header>
     <main class="mb-auto">
+      <% flash.each do |message_type, message| %>
+        <div class="flash-message <%= message_type %>"><%= message %></div>
+      <% end %>
       <%= yield %>
     </main>
     <footer class="bg-custom text-white pt-5 pb-4" style="background-color: #a9dce1;">

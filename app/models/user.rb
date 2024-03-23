@@ -27,10 +27,11 @@ class User < ApplicationRecord
 
   def get_profile_image(width, height)
     unless profile_image.attached?
-      file_path = Rails.root.join('app/assets/images/no-user.PNG')
+      file_path = Rails.root.join('app/assets/images/no_user.JPEG')
       profile_image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
     end
-    profile_image.variant(gravity: :center, resize: "#{width}x#{height}", crop: "#{(width*0.7).to_i}x#{(height*0.7).to_i}+0+0").processed
+    #profile_image.variant(gravity: :center, resize: "#{width}x#{height}", crop: "#{(width*0.7).to_i}x#{(height*0.7).to_i}+0+0").processed
+    profile_image.variant(resize: "#{width}x#{height}!" ).processed
   end
 
   # ゲストログイン
