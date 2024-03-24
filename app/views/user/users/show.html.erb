@@ -154,7 +154,7 @@
       </table>
   <!-- ユーザーの投稿一覧 -->
       <div class="card-list-container py-5 w-100 ">
-        <% @posts.sort_by(&:created_at).reverse.each do |post| %>
+        <% @posts.each do |post| %>
           <div class="card w-50 mx-auto mt-4 shadow-lg text">
             <% if post.get_image.present? %>
               <%= image_tag post.get_image %>
