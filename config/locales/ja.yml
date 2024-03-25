@@ -1,10 +1,12 @@
 ja:
   activerecord:
+    models:
+      user: ユーザー
     attributes:
       post:
         title: タイトル
         body: 感想
-      user:
+      user: 
         name: 名前
         introduction: 自己紹介
       post_comment:

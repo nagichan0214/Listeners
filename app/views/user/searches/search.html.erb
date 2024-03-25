@@ -11,6 +11,39 @@
     .text {
       color: gray;
     }
+    
+    .cute-button1 {
+      background-color: #72d7e0;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+      font-size: 16px;
+    }
+    
+    .cute-button1:hover {
+  background-color: #72d7e0;  /* カーソルが重なっても背景色は変更しない */
+  color: white;  /* カーソルが重なっても文字の色は変更しない */
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);  /* カーソルが重なっても影の効果は変更しない */
+}
+
+
+    .cute-button2 {
+          background-color: white;
+          color: #4f969c;
+          border: none;
+          padding: 10px 20px;
+          border-radius: 5px;
+          box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+          font-size: 16px;
+        }
+        
+    .cute-button2:hover {
+          background-color: white;  /* カーソルが重なっても背景色は変更しない */
+          color: #4f969c;  /* カーソルが重なっても文字の色は変更しない */
+          box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);  /* カーソルが重なっても影の効果は変更しない */
+        }
   </style>
 </head>
 
@@ -36,9 +69,9 @@
                 </p>
                 <p class="card-text">
                   <% if current_user != user && current_user.following?(user) %>
-                    <td><%= link_to "フォロー中", user_user_relationships_path(user.id), method: :delete %></td>
+                    <td><%= link_to "フォロー中", user_user_relationships_path(user.id), method: :delete,class: "cute-button2 btn btn-sm" %></td>
                   <% elsif current_user != user %>
-                    <td><%= link_to "フォローする", user_user_relationships_path(user.id), method: :post %></td>
+                    <td><%= link_to "フォローする", user_user_relationships_path(user.id), method: :post, class: "cute-button1 btn btn-sm" %></td>
                   <% end %>
                 </p>
               </div>
