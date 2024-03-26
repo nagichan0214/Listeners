@@ -20,7 +20,7 @@
         background: #fff;
         color: #f93d5d;
       }
-      
+
       .pagination-container {
         display: inline-block;
         display: flex;
@@ -28,26 +28,26 @@
         color: gray;
       }
 
-      .pagination-container a {  
+      .pagination-container a {
         color: black;
         float: left;
         padding: 8px 16px;
         text-decoration: none;
         color: gray;
       }
-      
+
       .flash-message {
         border-radius: 5px;
         padding: 16px 24px;
         margin: 16px 0px;
       }
-       
+
       .flash-message.notice {
         background-color: #a9dce1;
         color: #fff;
         border: solid 1px #0067C0;
       }
-       
+
       .flash-message.alert {
         background-color: #fc9eae;
         color: #fff;
@@ -117,8 +117,9 @@
       </nav>
       <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
-
-      <%= render 'user/searches/search_form' %>
+          
+            <%= render 'user/searches/search_form' %>
+          
         </div>
       </nav>
     </header>
@@ -126,6 +127,21 @@
       <% flash.each do |message_type, message| %>
         <div class="flash-message <%= message_type %>"><%= message %></div>
       <% end %>
+      <% if request.path == "/users" && resource.errors.any? %>
+        <div id="error_explanation" class="flash-message alert" data-turbo-cache="false">
+          <h3>
+            <%= I18n.t("errors.messages.not_saved",
+                       count: resource.errors.count,
+                       resource: resource.class.model_name.human.downcase)
+             %>
+          </h3>
+          <ul>
+            <% resource.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
       <%= yield %>
     </main>
     <footer class="bg-custom text-white pt-5 pb-4" style="background-color: #a9dce1;">

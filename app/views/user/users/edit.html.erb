@@ -34,7 +34,9 @@
             <div class="input-group-prepend">  
               <span class="input-group-text" aria-hidden="true"><i class="fa-regular fa-circle-user"></i></span>
             </div>
-            <%= form.text_field :name, class: "form-control", autofocus: true, id:"inputName", placeholder:"名前を入力"%>
+            <% unless @user.guest_user? %>
+              <%= form.text_field :name, class: "form-control", autofocus: true, id:"inputName", placeholder:"名前を入力"%>
+            <% end %>
           </div>
           <%= form.text_area :introduction, class: "form-control", rows: "6", id: "inputIntroduction", placeholder: "自己紹介を追加する" %>
           
