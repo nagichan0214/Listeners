@@ -56,13 +56,13 @@
     <div class="col-lg-6 col-xl-6 three_buttons">
       <div class="btn-wrapper col-10 mx-auto flex-column align-items-center">
         <div class="row">
-          <%= link_to "ゲストログイン（閲覧用）", users_guest_sign_in_path, class: "btn btn-secondary btn-sm btn-block rounded-pill mb-3 sign_in", method: :post %>
+          <%= link_to "ゲストログイン（閲覧用）", users_guest_sign_in_path, class: "btn btn-secondary btn-sm btn-block rounded-pill mb-3 ", method: :post %>
         </div>
         <div class="row">
-          <%= link_to 'Log in', new_user_session_path, class: "btn btn-info btn-sm btn-block rounded-pill mb-3 sign_in" %>
+          <%= link_to 'Log in', new_user_session_path, class: "btn btn-info btn-sm btn-block rounded-pill mb-3 ", style: "color: white;" %>
         </div>
         <div class="row">
-          <%= link_to 'Sign up', new_user_registration_path, class: "btn btn-success btn-sm btn-block rounded-pill sign_up" %>
+          <%= link_to 'Sign up', new_user_registration_path, class: "btn btn-success btn-sm btn-block rounded-pill " %>
         </div>
       </div>
     </div>

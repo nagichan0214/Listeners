@@ -71,6 +71,16 @@
       color: #fff
 
     }
+    
+    .button1 {
+      background-color: #fa778d;
+      color: white;
+    }
+
+    .button1:hover {
+      background-color: #fa778d;
+      color: white;
+    }
 
 
   </style>
@@ -177,7 +187,7 @@
 
                   <% if post.favorited_by?(current_user) %>
                     <p>
-                      <%= link_to user_post_favorite_path(post), method: :delete, class: "btn btn-sm btn-hover" do %>
+                      <%= link_to user_post_favorite_path(post), method: :delete, class: "btn btn-sm button1" do %>
                         ♥<%= post.favorites.count %> いいね
                       <% end %>
                     </p>

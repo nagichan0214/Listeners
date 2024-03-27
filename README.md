@@ -30,4 +30,5 @@ ER図 : https://drive.google.com/file/d/1Qf2orPlCZA3RFDg0uChFX38SAGCYEJPd/view?u
 - IDE：Cloud9
 ## 使用素材
 ・フリーイラスト素材として以下を使用  
-      ◦ Adobe Stock(https://stock.adobe.com/jp/)
+      ◦ Pexels(https://www.pexels.com/ja-jp/)
+      ◦ カクレノ(https://kotonohaworks.com/free-icons/)
