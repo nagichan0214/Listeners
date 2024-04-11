@@ -19,7 +19,7 @@
 ・自分が気になる楽器のジャンルのコンサートの感想を検索する時​
 
 ## 設計書
-テーブル定義書 : https://docs.google.com/spreadsheets/d/1ZuOQTeFvLC7LgiaZ7oS-a2OygPhtFOYP/edit?usp=sharing&ouid=111141591398567769725&rtpof=true&sd=true
+テーブル定義書 : https://docs.google.com/spreadsheets/d/1ZuOQTeFvLC7LgiaZ7oS-a2OygPhtFOYP/edit?usp=sharing&ouid=111141591398567769725&rtpof=true&sd=true  
 ER図 : https://drive.google.com/file/d/1Qf2orPlCZA3RFDg0uChFX38SAGCYEJPd/view?usp=sharing
 
 ## 開発環境
