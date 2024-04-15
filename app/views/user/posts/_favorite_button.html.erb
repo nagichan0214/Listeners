@@ -1,0 +1,41 @@
+<head>
+  <style>
+  .button {
+    background-color: #fdc1cb;
+    color: white;
+    border: none;
+
+  }
+
+  .button:hover {
+      background-color: #fa778d;
+      color: white;
+  }
+
+ .button1 {
+    background-color: #fa778d;
+    color: white;
+  }
+
+  .button1:hover {
+    background-color: #fa778d;
+    color: white;
+  }
+
+
+  </style>
+</head>
+
+<% if post.favorited_by?(current_user) %>
+  <p>
+    <%= button_to user_post_favorite_path(post), method: :delete, class: "btn btn-sm button1" do %>
+      ♥ <%= post.favorites.count %> いいね
+    <% end %>
+  </p>
+<% else %>
+  <p>
+    <%= button_to user_post_favorite_path(post), method: :post, class: "btn  btn-sm button" do %>
+      ♡ <%= post.favorites.count %> いいね
+    <% end %>
+  </p>
+<% end %>

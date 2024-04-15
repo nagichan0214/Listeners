@@ -1,101 +1,10 @@
-<head>
-  <style>
-    .card {
-      animation: slideIn 1s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-    }
-
-    @keyframes slideIn {
-      0% {
-        transform: translateX(180px);
-        opacity: 0;
-      }
-      100% {
-        transform: translateX(0);
-      }
-      40%,100% {
-        opacity: 1;
-      }
-    }
-
-    .button {
-      background-color: #fdc1cb;
-      color: white;
-      border: none;
-
-       }
-
-    .button:hover {
-        background-color: #fa778d;
-        color: white;
-      }
-
-
-
-    .text {
-      color: gray;
-
-    }
-
-    .button1 {
-      background-color: #fa778d;
-      color: white;
-    }
-
-    .button1:hover {
-      background-color: #fa778d;
-      color: white;
-    }
-
-
-  </style>
-</head>
 
 
 
 
 <div class="card-list-container py-5">
   <% @posts.each do |post| %>
-    <div class="card w-50 mx-auto mt-4 shadow-lg text">
-        <% if post.get_image.present? %>
-          <%= image_tag post.get_image %>
-        <% end %>
-          <div class="card-body">
-            <div class="row">
-              <div class="col-2">
-                <%= image_tag post.user.get_profile_image(100,100), style: "border-radius: 50%;" %>
-              </div>
-              <div class="col-10">
-                <p class="card-title">
-                  <strong><p>ユーザーネーム：<%= link_to post.user.name, user_user_path(post.user), style: "color: gray;" %></p></strong>
-                </p>
-                <p class="card-title" style="font-size: 30px;">
-                  <%= link_to user_post_path(post.id), style: "color: #53a8b7;" do %>
-                    <%= post.title %>
-                  <% end %>
-                </p>
-                <p class="card-text" style="font-size: 20px;"><%= post.body %></p>
-
-                <% if post.favorited_by?(current_user) %>
-                  <p>
-                    <%= button_to user_post_favorite_path(post), method: :delete, class: "btn btn-sm button1" do %>
-                      ♥ <%= post.favorites.count %> いいね
-                    <% end %>
-                  </p>
-                <% else %>
-                  <p>
-                    <%= button_to user_post_favorite_path(post), method: :post, class: "btn  btn-sm button" do %>
-                      ♡ <%= post.favorites.count %> いいね
-                    <% end %>
-                  </p>
-                <% end %>
-
-                <p>
-                  <%= link_to "#{post.post_comments.count} コメント", user_post_path(post.id), class: "btn btn-secondary btn-sm" %>
-                </p>
-              </div>
-            </div>
-          </div>
-    </div>
+    <%= render 'user/posts/posts_list', post: post %>
   <% end %>
   <div class="pagination-container">
     <%= paginate @posts %>
