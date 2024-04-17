@@ -20,7 +20,9 @@
 
 ## 設計書
 テーブル定義書 : https://docs.google.com/spreadsheets/d/1ZuOQTeFvLC7LgiaZ7oS-a2OygPhtFOYP/edit?usp=sharing&ouid=111141591398567769725&rtpof=true&sd=true  
-ER図 : https://drive.google.com/file/d/1Qf2orPlCZA3RFDg0uChFX38SAGCYEJPd/view?usp=sharing
+ER図 : https://drive.google.com/file/d/1Qf2orPlCZA3RFDg0uChFX38SAGCYEJPd/view?usp=sharing  
+AWS構成図 : https://drive.google.com/file/d/1n_1isHJtYSRaqSRN39XEF29mk8kL6vda/view?usp=sharing  
+AWSインフラ設計書 : https://docs.google.com/spreadsheets/d/1l06CA4T9pJIxTkuhrcethyTJXRp2I7CokrRqfxj4Dfg/edit?usp=sharing  
 
 ## 開発環境
 - OS：Linux(CentOS)
