@@ -30,23 +30,33 @@ class User::PostsController < ApplicationController
 
   def edit
     @post = Post.find(params[:id])
+    unless @post.user == current_user
+      redirect_back(fallback_location: user_root_path)
+    end
   end
 
   def update
     @post = Post.find(params[:id])
-    if @post.update(post_params)
-      flash[:notice] = "更新しました!"
-      redirect_to user_post_path(@post.id)
-    else
-      flash[:alert] = "更新できませんでした..."
-      render :edit
+    if @post.user == current_user
+      if @post.update(post_params)
+        flash[:notice] = "更新しました!"
+        redirect_to user_post_path(@post.id)
+      else
+        flash[:alert] = "更新できませんでした..."
+        render :edit
+      end
+    else 
+      redirect_back(fallback_location: user_root_path)
     end
   end
 
   def destroy
-    post = Post.find(params[:id])
-    post.destroy
-    redirect_to user_posts_path
+    @post = Post.find(params[:id])
+    if @post.user == current_user
+      @post.destroy
+    else
+      redirect_to user_posts_path
+    end
   end
 
    private
